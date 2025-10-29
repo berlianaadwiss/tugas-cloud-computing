@@ -1,9 +1,12 @@
-version: "3.8"
-
-services:
-  web:
-    build: .
-    container_name: php-app
-    ports:
-      - "8080:80"
-    restart: always
+version: "3.9" 
+ 
+services: 
+  app: 
+    build: 
+      context: . 
+      dockerfile: Dockerfile 
+    container_name: php_app 
+    ports: 
+      - "8080:80" 
+    volumes: 
+      - .:/var/www/html 
