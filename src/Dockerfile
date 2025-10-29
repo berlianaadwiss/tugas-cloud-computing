@@ -1,8 +1,15 @@
-# Gunakan base image PHP dengan Apache
-FROM php:8.2-apache
-
-# Salin file dari folder src ke folder web default Apache
-COPY src/ /var/www/html/
-
-# Expose port 80
-EXPOSE 80
+FROM php:8.2-apache 
+ 
+RUN docker-php-ext-install pdo pdo_mysql 
+ 
+RUN a2enmod rewrite 
+ 
+COPY . /var/www/html/ 
+ 
+WORKDIR /var/www/html 
+ 
+RUN chown -R www-data:www-data /var/www/html 
+ 
+EXPOSE 80 
+ 
+CMD ["apache2-foreground"]
